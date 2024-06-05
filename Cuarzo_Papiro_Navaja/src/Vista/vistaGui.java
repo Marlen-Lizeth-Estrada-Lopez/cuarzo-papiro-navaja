@@ -1,7 +1,9 @@
 package Vista;
+import Controlador.controlador;
 import Modelo.elecciones;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
@@ -95,4 +97,43 @@ public class vistaGui extends JFrame implements vista{
 
     }
 
+    @Override
+    public void mostrarVista(controlador controlador) {
+        setVisible(true);
+        papiro.addMouseListener(controlador);  
+        cuarzo.addMouseListener(controlador);
+        navaja.addMouseListener(controlador);
+    }
+
+    @Override
+    public void CuarzoPapiroNavajaBot(elecciones elecciondelBot) {        
+        if(elecciondelBot == elecciones.PAPIRO){
+            bot.setIcon(papiroBot);
+    }else if(elecciondelBot == elecciones.CUARZO){
+            bot.setIcon(cuarzoBot);
+    }else if(elecciondelBot == elecciones.NAVAJA){
+            bot.setIcon(navajaBot);
+    }
+    }
+
+    @Override
+    public void CuarzoPapiroNavajaJugador(elecciones elecciondeljugador) {
+        if(elecciondeljugador == elecciones.PAPIRO){
+            jugador.setIcon(papiroJugador);
+    }else if(elecciondeljugador == elecciones.CUARZO){
+            jugador.setIcon(cuarzoJugador);
+        }else if(elecciondeljugador == elecciones.NAVAJA){
+            jugador.setIcon(navajaJugador);
+        }
+    }
+
+    @Override
+    public elecciones ConseguirEleccionDelJugador() {
+        return eleccionesDeLaGui;
+    }
+
+    @Override
+    public void VerWins(int winsDelJugador, int winsDelBot) {
+        JOptionPane.showMessageDialog(container, "Jugador: " + winsDelJugador + " --- Papaleta: " + winsDelBot, "Cantidad de victorias", 1);
+    }
 }
